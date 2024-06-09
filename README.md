@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Online shop database management - 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
@@ -14,12 +14,6 @@ This project involved creating a robust online shop relational database, tailore
 - **Secure Backend:** Developed in C# for efficient data processing.
 - **Quality Assurance:** Extensive testing and debugging for stability.
 
-=======
-# OnlineShopFrontend
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
-
->>>>>>> d68e82f (initial commit)
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
