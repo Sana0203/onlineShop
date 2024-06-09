@@ -1,5 +1,5 @@
 
-# Online shop database management - 
+# Online shop database management - Frontend - Sana Maleki
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
 
