@@ -1,0 +1,68 @@
+<form [formGroup]="orderform" novalidate >
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>Order Information</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        @if(this.action=='remove'){
+          <p class="remove">Do you want to delete this entry?</p>
+        }
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Customer id</mat-label>
+              <input matInput placeholder="Customer name" formControlName="customer">
+
+              <button (click)="selectCustomer()" mat-button matSuffix >
+                {{btn}}
+              </button>
+
+              @if (orderform.controls['customer'].hasError('required')) {
+                <mat-error>Customer name is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+            </div>
+        </div>
+
+
+        @if (this.selectCust) {
+            <div class="row">
+              <div>
+                <app-customers 
+                    #customers 
+                    [selectable]="true"
+                    (selectedItem)="selectClickCustomer($event)" 
+                />
+              </div>
+            </div>
+          }
+
+        <div class="row">
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Order Status </mat-label>
+              <mat-select matInput placeholder="Status" formControlName="status">
+                @for (c of status; track c.status) {
+                  <mat-option [value]="c.id">{{c.status}}</mat-option>
+                }
+              </mat-select>
+              @if (orderform.controls['status'].hasError('required')) {
+                <mat-error>Status is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+        </div>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button type="" (click)="cancelClick()">Cancel</button>
+        <button mat-raised-button [color]="this.color" type="submit" (click)="submintClick()">Submit</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  

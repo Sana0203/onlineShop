@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'customers'">Customers</a>
+      <a mat-list-item [routerLink]="'products'">Products</a>
+      <a mat-list-item [routerLink]="'orderDetails'">Order details</a>
+      <a mat-list-item [routerLink]="'orders'">Orders</a>
+      <a mat-list-item (click)="openAboutUs()">About us</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      @if (isHandset$ | async) {
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      }
+      <span>Online Shop Management System</span>
+    </mat-toolbar>
+    
+    <div id="router-outlet">
+      <router-outlet/>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

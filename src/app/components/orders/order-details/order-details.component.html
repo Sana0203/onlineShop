@@ -1,0 +1,104 @@
+<form [formGroup]="orderform" novalidate>
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>Customer Information</mat-card-title>
+
+        
+
+      </mat-card-header>
+      <mat-card-content>
+        @if(this.action=='remove'){
+          <p class="remove">Do you want to delete this entry?</p>
+        }
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Product Id</mat-label>
+              <input type="number" matInput placeholder="Product id" formControlName="productId">
+
+
+            <button (click)="selectProduct()" mat-button matSuffix >
+              {{btnProduct}}
+            </button>
+
+              @if (orderform.controls['productId'].hasError('pattern')) {
+                <mat-error>Product id is <strong>invaild</strong></mat-error>
+              }
+
+            </mat-form-field>
+          </div>
+        </div>
+
+        @if (this.selectPro) {
+          <div class="row">
+            <div>
+              <app-products 
+                  #customers 
+                  [selectable]="true"
+                  (selectedItem)="selectClickProduct($event)" 
+              />
+            </div>
+          </div>
+        }
+
+        <div class="row">
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Order id</mat-label>
+              <input type="number"  matInput placeholder="Order id" formControlName="orderId">
+
+            <button (click)="selectOrder()" mat-button matSuffix >
+              {{btnCutomer}}
+            </button>
+              
+              @if (orderform.controls['orderId'].hasError('required')) {
+                <mat-error>Order id is <strong>required</strong></mat-error>
+              }
+              
+            </mat-form-field>
+            
+          </div>
+        </div>
+        
+        @if (this.selectOrders) {
+          <div class="row">
+            <div>
+              <app-addorders
+                  #customers 
+                  [selectable]="true"
+                  (selectedItem)="selectClickOrder($event)" 
+              />
+            </div>
+          </div>
+        }
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Quantity</mat-label>
+              <input type="number" matInput type="number" placeholder="Quantity" formControlName="quantity">
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Unit price</mat-label>
+              <input matInput type="number" class="right-align" placeholder="Unit price" formControlName="unitPrice">
+              <span matTextPrefix>$&nbsp;</span>
+              <span matTextSuffix>.00</span>
+            </mat-form-field>
+          </div>
+        </div>
+        
+  
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button type="" (click)="cancelClick()">Cancel</button>
+        <button mat-raised-button [color]="this.color" type="submit" (click)="submintClick()">Submit</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  

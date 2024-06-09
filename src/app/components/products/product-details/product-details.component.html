@@ -1,0 +1,69 @@
+<form [formGroup]="productform" novalidate >
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>Product Information</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        @if(this.action=='remove'){
+          <p class="remove">Do you want to delete this entry?</p>
+        }
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Name" formControlName="name">
+              @if (productform.controls['name'].hasError('required')) {
+                <mat-error>Name is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Rating</mat-label>
+              <input matInput type="number" placeholder="rating" formControlName="rating">
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Category </mat-label>
+              <mat-select matInput placeholder="Category" formControlName="productCategories">
+                @for (c of categories; track c.name) {
+                  <mat-option [value]="c.id">{{c.name}}</mat-option>
+                }
+              </mat-select>
+              @if (productform.controls['productCategories'].hasError('required')) {
+                <mat-error>Category is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                @if (productform.controls['description'].hasError('pattern')) {
+                  <mat-error>Description is <strong>invaild</strong></mat-error>
+                }
+              </mat-form-field>
+          </div>
+        </div>
+  
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button type="" (click)="cancelClick()">Cancel</button>
+        <button mat-raised-button [color]="this.color" type="submit" (click)="submintClick()">Submit</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  

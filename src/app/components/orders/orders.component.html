@@ -1,0 +1,71 @@
+@if (currentAction=='loading') {
+  <div class="center">
+    <mat-spinner></mat-spinner>
+  </div>
+}
+
+@if (currentAction!='loading' && currentAction!='list') {
+  <app-order-details
+    [action]="currentAction"
+    (onSubmit)="onAdd($event)"
+    (onCancel)="onCancel()"
+    [data]="data"
+  />
+}
+
+@if (currentAction=='list') {
+    
+    <button mat-flat-button color="primary" (click)="add()">
+      <mat-icon>add</mat-icon> Add new entry
+    </button>
+    
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        
+          <ng-container matColumnDef="customerName">
+              <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.order.customer.name}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="productName">
+              <th mat-header-cell *matHeaderCellDef> Products </th>
+              <td mat-cell *matCellDef="let element"> {{element.product.name}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Product quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="unitprice">
+              <th mat-header-cell *matHeaderCellDef> Product price </th>
+              <td mat-cell *matCellDef="let element"> ${{element.unitPrice}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="totalprice">
+            <th mat-header-cell *matHeaderCellDef> Total price </th>
+            <td mat-cell *matCellDef="let element"> ${{element.unitPrice*element.quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="orderStatus">
+            <th mat-header-cell *matHeaderCellDef> Order status </th>
+            <td mat-cell *matCellDef="let element"> {{element.order.orderStatus.status}} </td>
+        </ng-container>
+  
+          <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>  </th>
+              <td mat-cell *matCellDef="let element"> 
+                  <button mat-icon-button (click)="edit(element)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="delete(element)">
+                      <mat-icon>delete</mat-icon>
+                    </button>    
+              </td>
+          </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+    
+    }
